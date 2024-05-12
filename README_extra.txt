@@ -1,0 +1,1 @@
+Some of the files are moved around, and the paths have to be changed, also the praat script is not anymore in the PraatScript folder
