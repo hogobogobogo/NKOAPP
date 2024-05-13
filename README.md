@@ -34,5 +34,16 @@ In broad terms the synthesis procedure follows the **source-filter paradigm**, w
 6. Change the durations between targets by proportioning the segments in different ways
   - make the durations get shorter and shorter starting from the longest part: `durModulationG = arithmetic_progression(1,valT)[::1]` or the interpolations get longer and longer starting from the shortest part: `durModulationG = arithmetic_progression(1,valT)[::-1]`
   - change the exponent of the durations
-7. Take the time discrete derivative of the splines. The splines are cubic polynomials, so the maximum derivative is `2`. So, three options are available for both the glottis and tract interpolations
-[0,1,2]: 0=no deriv, 1=1st deriv, 2=2nd deriv
+7. Take the time discrete derivative of the splines. The splines are cubic polynomials, so the maximum derivative is `2`. So, three options are available for both the glottis and tract interpolations in `derivativeGlot` and `derivativeTract`. This is still in its experimental state, use at own risk.
+    - [0,1,2]: 0=no deriv, 1=1st deriv, 2=2nd deriv
+8. Choose the upper and lower boundary for random uniform number generation as a factor to randomize the glottis parameters (f0, Intensity, Jaw Height, Tongue Heigh, etc...)
+
+---
+
+_**Now build the NKOAPP.py file**_
+    - After building, there should be a tractSequence file in the `\TractSequence` folder that should look something like this `2024-05-13_02-50-43_TractSequence_ConstPressureAndf0_Geometric glottis_n9_normalDist[1, 1]_[0, 0]_Manual.txt`
+    - Go to `VocalTractLab2` and navigate to _Synthesis from file_ > _Tract sequence file to audio_. Then find the tractSequence file in the beforementioned folder and select it.
+    - This can take long if the tractSequence file is more than 10s. Ignore the `"The Program is not responding"`, it's just rendering. 
+
+**by Lawrence McGuire**
+    
