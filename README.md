@@ -39,11 +39,10 @@ In broad terms the synthesis procedure follows the **source-filter paradigm**, w
 8. Choose the upper and lower boundary for random uniform number generation as a factor to randomize the glottis parameters (f0, Intensity, Jaw Height, Tongue Heigh, etc...)
 
 ---
+Now build the NKOAPP.py file
+- After building, there should be a tractSequence file in the `\TractSequence` folder that should look something like this `2024-05-13_02-50-43_TractSequence_ConstPressureAndf0_Geometric glottis_n9_normalDist[1, 1]_[0, 0]_Manual.txt`
+- Go to `VocalTractLab2` and navigate to _Synthesis from file_ > _Tract sequence file to audio_. Then find the tractSequence file in the beforementioned folder and select it.
+- This can take long if the tractSequence file is more than 10s. Ignore the `"The Program is not responding"`, it's just rendering. 
 
-_**Now build the NKOAPP.py file**_
-    - After building, there should be a tractSequence file in the `\TractSequence` folder that should look something like this `2024-05-13_02-50-43_TractSequence_ConstPressureAndf0_Geometric glottis_n9_normalDist[1, 1]_[0, 0]_Manual.txt`
-    - Go to `VocalTractLab2` and navigate to _Synthesis from file_ > _Tract sequence file to audio_. Then find the tractSequence file in the beforementioned folder and select it.
-    - This can take long if the tractSequence file is more than 10s. Ignore the `"The Program is not responding"`, it's just rendering. 
-
-**by Lawrence McGuire**
+<ins>**by Lawrence McGuire**</ins>
     
