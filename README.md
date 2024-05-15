@@ -4,7 +4,7 @@ The initial goals for this system were to allow for producing 'natural' and 'unn
 
 In broad terms the synthesis procedure follows the **source-filter paradigm**, where the vocal fold vibration serves as the excitation of the filter. The vocal tract then serves as the filtering of the glottal pulses.
 
-**Sound examples can be found in** [NKOAPP]([https://github.com/praat/praat](https://neuskeeloor.app/))
+**Sound examples can be found in** [NKOAPP](https://neuskeeloor.app/)
 
 ---
 
