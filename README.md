@@ -15,7 +15,7 @@ In broad terms the synthesis procedure follows the **source-filter paradigm**, w
     - Navigate to the folder in directory `NKOAPP\Praat Scripts\` and choose the `f0_intensity.txt` file. Then click on _Run_ in the script popup window.
     - Wait a bit for the script to finish, then save the file as a txt-file with an arbitrary name in the folder `NKOAPP\f0andIntensity`. For example as `f0andIntVoxAdam.txt`
     - done for now. Continue to 4
-4. Open `NKOAPP.py` file and the `VocalTractLab2` software
+4. Open `NKOAPP.py` file in your IDE of choice and the `VocalTractLab2` software
   - First of all you have to choose the glottis model `glChoice = glGeomOptions['GM']` with three choices `'GM'`, `'2M'` or `'TRI'`.
     - Choose the same glottis model as `glChoice` (see above): _Synthesis models_ > _Vocal folds model_ > Choose one of the three > then click on _Use selected model for synthesis_
   - If you want to use the f0 and intensity data from the recording, you should add the filename in this part of the code `f0andIntFileName = directory + '/f0andIntensity/**filename.txt**'`
