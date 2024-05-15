@@ -22,20 +22,20 @@ In broad terms the synthesis procedure follows the **source-filter paradigm**, w
   - If we want to manually generate the tractSequence or use the f0 and intensity values from the praat script
     - `manual = True` _go to Section A in the code_
     - `manual = False` _go to Section B in the code_
-5. Two ways of working with NKOAPP are either through manual input of glottis parameters, vocal tract shapes and durations of the interpolations between _sources_ and _targets_ 
+5. Two ways of working with NKOAPP are either through manual input of glottis parameters, vocal tract shapes and durations of the interpolations between _sources_ and _targets_. The names of the glottis and vocal tract presets can be found in the `speakerJD2.json` file.  
 #### SECTION A
   - **Option A1** for glottis and tract targets (glOption,trOption) and the durations between them
   - **Option A2** to generate random interpolations between a set of chosen glottis and tract targets (glOption, trOption) and random durations
   - Follow the comments in the code. Don't forget to comment out the parts you don't need when working in another section and another Option
 
 #### SECTION B
-  - same as above, but now the amount of frames in the tractSequence-file amount to the same duration as the audio file. This can not be changed.
+  - Same as above, but now the amount of frames in the tractSequence-file amount to the same duration as the audio file. (_This can not be changed_)
 
 6. Change the durations between targets by proportioning the segments in different ways
   - make the durations get shorter and shorter starting from the longest part: `durModulationG = arithmetic_progression(1,valT)[::1]` or the interpolations get longer and longer starting from the shortest part: `durModulationG = arithmetic_progression(1,valT)[::-1]`
   - change the exponent of the durations
 7. Take the time discrete derivative of the splines. The splines are cubic polynomials, so the maximum derivative is `2`. So, three options are available for both the glottis and tract interpolations in `derivativeGlot` and `derivativeTract`. This is still in its experimental state, use at own risk.
-    - [0,1,2]: 0=no deriv, 1=1st deriv, 2=2nd deriv
+    - [0,1,2]: _0=no deriv, 1=1st deriv, 2=2nd deriv_
 8. Choose the upper and lower boundary for random uniform number generation as a factor to randomize the glottis parameters (f0, Intensity, Jaw Height, Tongue Heigh, etc...)
 
 ---
