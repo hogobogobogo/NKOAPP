@@ -33,8 +33,9 @@ gl = glotValues(data=data) # dictionary with all glottis modes
 tr = tractValues(data=data) # dictionary with all the tract values for each utterance a,e,i+consonants etc..
 
 #!# choose if we want to manually generate the tractSequence or use the f0 and intensity values from the praat script
-manual = True # True: Goto Section A / False: Goto Section B
-f0andIntFileName = directory + '/f0andIntensity/f0andInt_45e.txt' # put here the filename // if this gives an error, the file is not in the root directory 
+manual = False # True: Goto Section A / False: Goto Section B
+fileName = 'f0andInt_45e.txt'
+f0andIntFileName = directory + '/f0andIntensity/'+fileName # put here the filename // if this gives an error, the file is not in the root directory 
 
 #_________________________________________________________________
 #!# Section A:
@@ -49,9 +50,9 @@ trOption = ['o','i','postalvlatI','u-raw','uvufricA','a','palfricA','a','i']
 durModulation = [200,200,300,400] # in total 400ms
 
 # # add your own values between '' for glOption, trOption and add durModulation (ms) (comment this out when working in this section)
-# glOption = ['','',''] 
-# trOption = ['','','']
-# durModulation = [] # in milliseconds
+# glOption = ['modGM','pressedGM','whGM'] 
+# trOption = ['a','o','velclosO']
+# durModulation = [5000] # in milliseconds
 
 # comment this out if you want to allow for the other options to work
 targetsInfo = targetNames(gl=gl,tr=tr,glotModes=glOption, tractConfigs=trOption)
@@ -64,12 +65,12 @@ targetsInfo = targetNames(gl=gl,tr=tr,glotModes=glOption, tractConfigs=trOption)
 # glOption = ['modGM', 'pressedGM','hrseGM','modGM','modGM','hrse2GM','modGM', 'modGM','modGM'] 
 # trOption = ['o','i','postalvlatI','u-raw','uvufricA','a','palfricA','a','i']
 # choose amount of total interpolations between targets(both for glottis as for vocal tract) 
-# numA2 = 20
-# durModulation = np.random.randint(200,800,int((numA2 - 1) / 2)) # in ms
+# numA2 = 1000
+# durModulation = np.random.randint(2,8,int((numA2 - 1) / 2)) # in ms
 
 # # add your own values between '' for glOption, trOption and add durModulation (ms) (comment this out when working in this section)
-# glOption = ['','',''] 
-# trOption = ['','','']
+# glOption = ['modGM','pressedGM','whGM'] 
+# trOption = ['a','o','velclosO']
 # choose amount of total interpolations between targets(both for glottis as for vocal tract) 
 # numA2 = 100
 # durModulation = np.random.randint(10,3000,int((numA2 - 1) / 2)) # in ms
@@ -80,7 +81,7 @@ targetsInfo = targetNames(gl=gl,tr=tr,glotModes=glOption, tractConfigs=trOption)
 # (do not comment this out)
 if(manual==True):
   #. if const=True f0 and Intensity will be constant (100Hz at 17000Pa)
-  fileName = 'Manual.txt'
+  fileName = 'Manual.txt' # overwrites the other fileName above :)
   totalDurFact = 1 # make the total length longer by a factor
   sumDurModulation = sum(durModulation)*(44100/110000)*totalDurFact
   f0andIntArrEnd = f0andIntensityReaderB(totalAmFrames= int(sumDurModulation),f0=100,intensity=17000)
@@ -90,8 +91,8 @@ if(manual==True):
 #!# Section B: 
 #.
 if (manual == False):
-  fileName = f0andIntFileName # put here the filename of the .txt-file // if this gives an error, the file is not in the root directory
-  with open(fileName, 'r') as f:
+  fileNameH = f0andIntFileName # put here the filename of the .txt-file // if this gives an error, the file is not in the root directory
+  with open(fileNameH, 'r') as f:
     f0data = f.readlines()
   #. if const=False f0 and Intensity are taken from the praat script
   f0andIntArrEnd = f0andIntensityReaderA(data=f0data)   
@@ -121,11 +122,11 @@ if (manual == False):
     # The amount of entries in glOption and trOption has to be greater than 3, and should always be of an uneven size N
     # The amount of entries in durModulation is: (N-1)/2
 # example (comment this out when working in this section)
-# glOption = ['modGM', 'pressedGM','hrseGM','modGM','modGM','hrse2GM','modGM', 'modGM','modGM'] 
-# trOption = ['o','i','postalvlatI','u-raw','uvufricA','a','palfricA','a','i']
+# glOption = ['uvplGM','pressedGM','pressedGM'] 
+# trOption = ['i', 'u', 'nnn', 'mmm']
 # choose amount of total interpolations between targets(both for glottis as for vocal tract) 
-# numB2 = 100
-# durModulation = np.random.randint(10,3000,int((numB2 - 1) / 2)) # in ms
+# numB2 = 50
+# durModulation = np.random.randint(120,700,int((numB2 - 1) / 2)) # in ms
 
 # # add your own values between '' for glOption, trOption and add durModulation (ms) (comment this out when working in this section)
 # glOption = ['','',''] 
@@ -144,6 +145,10 @@ trTargets = targetsInfo[1]
 glModes = targetsInfo[2]
 trConfigs = targetsInfo[3]
 num = len(glTargets)
+
+# Calculate the interpolation rate IR
+ir = (num/(sum(durModulation)))*1000
+print('Interpolation Rate: '+ str(ir))
 
 #_________________________________________________________________
 #!# GlOBAL DURATIONS MODIFICATIONS 
@@ -232,7 +237,7 @@ current_time = datetime.now()
 time_string = current_time.strftime("%Y-%m-%d_%H-%M-%S")
 
 # FIND THE TRACT SEQUENCE FILE in the /TractSequence folder
-tractFileName = directory + '/TractSequences/'+'{}'.format(time_string)+'_TractSequence'+'_ConstPressureAndf0_{}_'.format(glChoice[0]) +'n{}_'.format(num)+'normalDist{}'.format([devL,devH])+'_{}'.format([derivativeGlot,derivativeTract])+'_{}'.format(fileName)
+tractFileName = directory + '/TractSequences/'+'{}'.format(time_string)+'_TractSequence'+'_ConstPressureAndf0_{}_'.format(glChoice[0])+'InterpolationRate{}_'.format(round(ir,2))+'n{}_'.format(num)+'dur{}_ms'.format(sum(durModulation))+'normalDist{}'.format([devL,devH])+'_{}'.format([derivativeGlot,derivativeTract])+'_{}'.format(fileName)
 # wavFileName = directory + '/Samples/'+'{}'.format(time_string)+'_TractSequence'+'_ConstPressureAndf0_{}_'.format(glChoice[0]) +'n{}_'.format(num)+'normalDist{}'.format([devL,devH])+'_{}'.format([derivativeGlot,derivativeTract])+'_{}'.format(fileName)+'.wav'
 print(tractFileName)
 f = open(tractFileName, 'w')
@@ -276,4 +281,3 @@ f.write(fullString)
 # #     raise ValueError('Error in vtlClose! Errorcode: %i' % failure)
 
 # # print('Finished.')
-
