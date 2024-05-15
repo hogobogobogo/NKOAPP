@@ -3,7 +3,8 @@ An application written in Python and making use of open source programs such as 
 The initial goals for this system were to allow for producing 'natural' and 'unnatural' sounding vocalizations and articulations, interpolations between mouth and glottis configurations in order to allow for continuous parameter changes of invariants (physical properties) and variants(f0, intensity, filtering coefficients) to go from one ‘speaker identity’ to another. Furthermore, using features from actual voice recordings then became an important way of using the system. Using variant parameters such as f0 & loudness to address prosodic, intonation and jitter and shimmer patterns in the voice recordings.
 
 In broad terms the synthesis procedure follows the **source-filter paradigm**, where the vocal fold vibration serves as the excitation of the filter. The vocal tract then serves as the filtering of the glottal pulses.
-**_Sound examples can be found in [NKOAPP]([https://github.com/praat/praat](https://neuskeeloor.app/))_**
+
+**Sound examples can be found in** [NKOAPP]([https://github.com/praat/praat](https://neuskeeloor.app/))
 
 ---
 
