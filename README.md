@@ -47,4 +47,4 @@ Now build the NKOAPP.py file
 - This can take long if the tractSequence file is more than 10s. Ignore the `"The Program is not responding"`, it's just rendering. 
 
 <ins>**by Lawrence McGuire**</ins>
-    
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/hogobogobogo/NKOAPP)    
